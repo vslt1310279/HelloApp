@@ -1,35 +1,37 @@
+import java.util.HashMap;
+import java.util.Map;
+
 public class Main {
     public static void main(String[] args) {
-        // UC7: Using a centralized CharacterPatternMap class for pattern management
-        String[] oopsBanner = new String[7];
+        // UC8: Final refined project using HashMap for pattern storage and rendering
+        String word = "OOPS";
+        renderBanner(word);
+    }
+
+    public static void renderBanner(String word) {
+        CharacterPatternMap patternMap = new CharacterPatternMap();
         
         for (int i = 0; i < 7; i++) {
-            oopsBanner[i] = String.join(" ", 
-                CharacterPatternMap.getPattern('O', i),
-                CharacterPatternMap.getPattern('O', i),
-                CharacterPatternMap.getPattern('P', i),
-                CharacterPatternMap.getPattern('S', i)
-            );
-        }
-
-        for (String line : oopsBanner) {
-            System.out.println(line);
+            StringBuilder line = new StringBuilder();
+            for (char letter : word.toCharArray()) {
+                line.append(patternMap.getPattern(letter, i)).append(" ");
+            }
+            System.out.println(line.toString());
         }
     }
 
-    // Static inner class to encapsulate ASCII art patterns
     public static class CharacterPatternMap {
-        private static final String[] O = {" *", " ", " ", " ", " ", " ", " ***"};
-        private static final String[] P = {"** ", " ", " ", "** ", "* ", "* ", "* "};
-        private static final String[] S = {" *", " ", "* ", " *", "    *", "    *", "* "};
+        private final Map<Character, String[]> patterns = new HashMap<>();
 
-        public static String getPattern(char letter, int row) {
-            switch (letter) {
-                case 'O': return O[row];
-                case 'P': return P[row];
-                case 'S': return S[row];
-                default: return "";
-            }
+        public CharacterPatternMap() {
+            // Initializing patterns into the HashMap for efficient retrieval
+            patterns.put('O', new String[]{" ****", "* *", "* *", "* *", "* *", "* *", " ****"});
+            patterns.put('P', new String[]{"***** ", "* *", "* *", "***** ", "* ", "* ", "* "});
+            patterns.put('S', new String[]{" ****", "* ", "* ", " ****", "    *", "    *", "**** "});
+        }
+
+        public String getPattern(char letter, int row) {
+            return patterns.getOrDefault(letter, new String[]{"       "})[row];
         }
     }
 }
