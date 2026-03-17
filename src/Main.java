@@ -1,11 +1,12 @@
 public class Main {
     public static void main(String[] args) {
-        System.out.println(" **** **** ***** **** ");
-        System.out.println("* * * * * * * *");
-        System.out.println("* * * * * * * ");
-        System.out.println("* * * * ***** **** ");
-        System.out.println("* * * * * *");
-        System.out.println("* * * * * * *");
-        System.out.println(" **** **** * **** ");
+        // Using String.join to build each line of the banner for better memory efficiency
+        System.out.println(String.join("", " *", " **", " **", " **", " "));
+        System.out.println(String.join("", "* ", " ", " ", "* *"));
+        System.out.println(String.join("", "* ", " ", " ", "* *"));
+        System.out.println(String.join("", "* ", " ", "*", "* "));
+        System.out.println(String.join("", "* ", " ", " ", "* "));
+        System.out.println(String.join("", "* ", " ", " ", "* "));
+        System.out.println(String.join("", " *", " **", " ", "** "));
     }
 }
